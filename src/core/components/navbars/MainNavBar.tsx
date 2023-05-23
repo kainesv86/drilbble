@@ -1,9 +1,4 @@
-import DarkMode from '@components/templates/mode/DarkMode';
-import Logo from '@public/images/logo.png';
-import WhiteLogo from '@public/images/logo_white.png';
-import { isChildrenPageActive } from '@utils/dynamicNavigation';
-import clsx from 'clsx';
-import Image from 'next/image';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,18 +11,28 @@ const MainNavbar: React.FunctionComponent<MainNavbarProps> = () => {
     const links = [
         {
             id: uuidv4(),
-            name: 'Trang chủ',
-            path: '/',
+            name: 'Inspiration',
+            path: '/inspiration',
         },
         {
             id: uuidv4(),
-            name: 'Bài Viết',
-            path: '/posts',
+            name: 'Find Work',
+            path: '/find-work',
         },
         {
             id: uuidv4(),
-            name: 'Tin Tức',
-            path: '/news',
+            name: 'Learn Design',
+            path: '/learn-design',
+        },
+        {
+            id: uuidv4(),
+            name: 'Go Pro',
+            path: '/go-pro',
+        },
+        {
+            id: uuidv4(),
+            name: 'Hire Designers',
+            path: '/hire-designers',
         },
     ];
 
@@ -55,42 +60,33 @@ const MainNavbar: React.FunctionComponent<MainNavbarProps> = () => {
     return (
         <>
             {/* main desktop menu sart*/}
-            <header className="fixed top-0 z-20 w-full transition-colors js-page-header backdrop-blur">
-                <div className="flex items-center px-6 py-6 xl:px-24 ">
-                    <Link className="shrink-0" href="/">
-                        <a>
-                            <div className="dark:hidden">
-                                <Image src={Logo} height={28} width={130} alt="Xhibiter | NFT Marketplace" className="h-auto max-h-7 " />
-                            </div>
-                            <div className="hidden dark:block">
-                                <Image src={WhiteLogo} height={28} width={130} alt="Xhibiter | NFT Marketplace" />
-                            </div>
-                        </a>
-                    </Link>
-                    {/* End  logo */}
+            <header className="z-20 flex items-center justify-center w-full h-20 transition-colors js-page-header backdrop-blur">
+                <div className="flex items-center w-full px-6">
+                    <div className="flex items-center justify-center gap-8">
+                        <Link className="shrink-0" href="/">
+                            <a>
+                                <div className="w-[72px]">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Dribbble_Text_Logo_Script.svg/2560px-Dribbble_Text_Logo_Script.svg.png" />
+                                </div>
+                            </a>
+                        </Link>
+                        {/* End  logo */}
 
-                    <nav className="flex justify-end w-full lg:justify-center navbar">
-                        <ul className="flex flex-row gap-10 m-0 lg:gap-0">
-                            {/* create */}
-                            {links.map((link) => (
-                                <li className="group" key={link.id}>
-                                    <Link href={link.path}>
-                                        <a>
-                                            <button className="text-jacarta-700 font-display hover:text-accent focus:text-accent dark:hover:text-accent dark:focus:text-accent flex items-center justify-between py-3.5 text-base dark:text-white lg:px-5">
-                                                <span
-                                                    className={clsx({
-                                                        'text-accent dark:text-accent': isChildrenPageActive(route.asPath, link.path),
-                                                    })}
-                                                >
-                                                    {link.name}
-                                                </span>
-                                            </button>
-                                        </a>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+                        <nav className="flex justify-end w-full lg:justify-center">
+                            <ul className="flex flex-row w-full gap-8 m-0">
+                                {/* create */}
+                                {links.map((link) => (
+                                    <li className="group" key={link.id}>
+                                        <Link href={link.path}>
+                                            <a>
+                                                <span className={'text-sm font-medium text-black'}>{link.name}</span>
+                                            </a>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                    </div>
 
                     <div className="fixed inset-0 z-10 flex items-center ml-auto bg-white opacity-0 js-mobile-menu dark:bg-jacarta-800 lg:relative lg:inset-auto lg:bg-transparent lg:opacity-100 dark:lg:bg-transparent">
                         {/* End menu for desktop */}
@@ -98,7 +94,26 @@ const MainNavbar: React.FunctionComponent<MainNavbarProps> = () => {
                         <div className="flex items-center ml-8 xl:ml-12">
                             {/* End metamask Wallet */}
 
-                            <div className="relative js-nav-dropdown group-dropdown">
+                            <ul className="flex items-center justify-center">
+                                <li>
+                                    <Link href={'/search'}>
+                                        <div className="h-[18px] w-[18px]">
+                                            <MagnifyingGlassIcon />
+                                        </div>
+                                    </Link>
+                                </li>
+                                <li className="mx-2.5">
+                                    <Link href={'/login'}>
+                                        <a className="text-sm font-medium text-black">Sign in</a>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={'/login'}>
+                                        <button className="bg-[#f082ac] rounded-lg text-white text-sm font-medium py-2.5 px-4">Sign up</button>
+                                    </Link>
+                                </li>
+                            </ul>
+                            {/* <div className="relative js-nav-dropdown group-dropdown">
                                 <button className="dropdown-toggle border-jacarta-100 hover:bg-accent focus:bg-accent group dark:hover:bg-accent ml-2 flex h-10 w-10 items-center justify-center rounded-full border bg-white transition-colors hover:border-transparent focus:border-transparent dark:border-transparent dark:bg-white/[.15]">
                                     {svgList['user']}
                                 </button>
@@ -113,7 +128,7 @@ const MainNavbar: React.FunctionComponent<MainNavbarProps> = () => {
                                     ))}
                                 </div>
                             </div>
-                            <DarkMode />
+                            <DarkMode /> */}
                         </div>
                         {/* End header right content (metamask and other) for desktop */}
                     </div>
